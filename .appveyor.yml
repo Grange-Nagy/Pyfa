@@ -32,3 +32,7 @@ for:
       # run install pyfa packages and any other requirements
       - sh: AppDir/usr/bin/python -s -m pip install -U pip setuptools wheel
       - sh: AppDir/usr/bin/python -s -m pip install -r ../requirements.txt
+    after_build:
+      - sh: ls -la build
+    artifacts:
+      - path: dist/pyfa-$PYFA_VERSION-linux.AppImage
