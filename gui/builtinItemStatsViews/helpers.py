@@ -10,6 +10,12 @@ class AutoListCtrl(wx.ListCtrl, listmix.ListCtrlAutoWidthMixin, listmix.ListRowH
         wx.ListCtrl.__init__(self, parent, ID, pos, size, style)
         listmix.ListCtrlAutoWidthMixin.__init__(self)
         listmix.ListRowHighlighter.__init__(self)
+        # Dynamically generate colors based on theme for checkbook row highlighting
+        if wx.SystemSettings.GetAppearance().IsDark():
+            listcol = wx.SystemSettings.GetColour(wx.SYS_COLOUR_LISTBOX)
+            highlight = listcol.ChangeLightness(110)
+            listmix.ListRowHighlighter.SetHighlightColor(self, highlight)
+        
 
 
 class AutoListCtrlNoHighlight(wx.ListCtrl, listmix.ListCtrlAutoWidthMixin, listmix.ListRowHighlighter):
